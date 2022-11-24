@@ -1,4 +1,4 @@
-NAME = libft_printf.a
+NAME = libftprintf.a
 SRC = $(shell ls ft_*.c)
 HEADER = ft_printf.h 
 OBJ = $(SRC:.c=.o)
@@ -7,10 +7,10 @@ all : $(NAME)
 	@echo "compiling targets $(shell ls ft_*.c)"
 $(NAME) : $(OBJ)
 	ar rc $(NAME) $(OBJ)
-%.c : %.o $(HEADER)
+%.o : %.c $(HEADER)
 	cc -c $(CFLAGS) $<
 clean : 
 	rm -f $(OBJ)
-fclean : 
+fclean : clean
 	rm -f $(NAME)
 re : fclean all

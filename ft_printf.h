@@ -10,13 +10,12 @@
 #define LOWERHEXBASE "0123456789abcdef"
 #define DECIMALBASE  "0123456789"
 
-void ft_putchar(char c);
-void ft_putstr(char *str);
-void ft_putnbr(int nb);
-void ft_converthexbase(unsigned int n, char *base);
-void ft_convertdecbase(unsigned long n, char *base);
-void ft_check_format(const char specifier, va_list args);
-
-
+int ft_printf(const char *format, ...);
+void ft_putchar(char c, int *count);
+void ft_putstr(char *str, int *count);
+void ft_putnbr(int nb, int *count);
+void ft_converthexbase(unsigned long n, char *base, int *count);
+void ft_convertdecbase(unsigned int n, char *base, int *count);
+void ft_check_format(const char specifier, va_list args, int *count);
 
 #endif

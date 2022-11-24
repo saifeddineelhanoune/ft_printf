@@ -5,24 +5,31 @@ int ft_printf(const char *format, ...)
 
 	va_list args;
 	int i;
+	int count;
 
 	i = 0;
-	va_start(args, format);
+	count = 0;
 	if (format)
 	{
+		va_start(args, format);
 		while (format[i])
 		{
 			if (format[i] == '%' && format[i + 1])
-				ft_check_format(format[i],args);
+				ft_check_format(format[++i], args, &count);
+			else if(format[i] != '%')
+				ft_putchar(format[i], &count);
+
 			i++;
 		}
+		va_end(args);
+		return count;
 	}
-	va_end(args);
-	return 0;
+	return -1;
 }
 int main()
 {
-	int nb = 0;
-	ft_printf("hello you should print an integer %d", nb);
+	char *s = "%";
+	printf("\n%d\n", ft_printf(s, 18));
+	printf("\n%d\n", printf(s, 18));
 	return (0);
 }
