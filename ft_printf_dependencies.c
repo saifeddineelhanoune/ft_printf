@@ -40,15 +40,26 @@ void ft_putstr(char *str)
 		ft_putstr("(null)");
 }
 
-void ft_convertbase(unsigned long n, char *base, int ln)
+void ft_converthexbase(unsigned int n, char *base)
 {
-    if (n >= ln)
+    if (n >= 16)
 	{
-		ft_convertbase(n / ln, base, ln);
+		ft_converthexbase(n / 16, base);
 		ft_putchar(base[n % 16]);
 	}
 	else
 		ft_putchar(base[n % 16]);
+}
+
+void ft_convertdecbase(unsigned long n, char *base)
+{
+    if (n >= 16)
+	{
+		ft_convertdecbase(n / 10, base);
+		ft_putchar(base[n % 10]);
+	}
+	else
+		ft_putchar(base[n % 10]);
 }
 
 void ft_check_format(const char specifier, va_list args)
@@ -56,34 +67,20 @@ void ft_check_format(const char specifier, va_list args)
 	if (specifier == 'p')
 	{
 		ft_putstr("0x");
-		ft_convertbase(va_arg(args, void *), LOWERHEXBASE, 16);
+		ft_converthexbase(va_arg(args, unsigned long), LOWERHEXBASE);
 	}
 	else if (specifier == 'd' || specifier == 'i')
 		ft_putnbr(va_arg(args, int));
 	else if (specifier == 's')
 		ft_putstr(va_arg(args, char *));
 	else if (specifier == 'c')
-		ft_putchar(va_arg(args, char));
+		ft_putchar(va_arg(args, int));
 	else if (specifier == 'x')
-		ft_convertbase(va_arg(args, unsigned int), LOWERHEXBASE, 16);
+		ft_converthexbase(va_arg(args, unsigned int), LOWERHEXBASE);
 	else if (specifier == 'X')
-		ft_convertbase(va_arg(args, unsigned int), UPPERHEXBASE, 16);
+		ft_converthexbase(va_arg(args, unsigned int), UPPERHEXBASE);
 	else if (specifier == 'u')
-		ft_convertbase(va_arg(args, unsigned int), DECIMALBASE, 10);
+		ft_converdectbase(va_arg(args, unsigned int), DECIMALBASE);
 	else
 		ft_putchar(specifier);
-}
-
-int ft_()
-{
-
-}
-
-int main()
-{
-
-
-
-
-	return 0;
 }
